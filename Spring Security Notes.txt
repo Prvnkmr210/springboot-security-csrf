@@ -1,0 +1,22 @@
+Springboot-security-csrf project
+
+As soon as Spring security dependency is added, it adds a login page for all the controller paths.
+
+Put a mapper '\login()' to have your login page. If not then Spring boot will load default login page.
+
+Here in this application, Registration page is also added to the login page.
+
+
+Note: Even jsp pages can also be debugged.
+
+
+Good example of authorization is demonstrated here.
+http.authorizeRequests()
+								.antMatchers("/register").permitAll()
+								.antMatchers("/welcome").hasAnyRole("USER", "ADMIN")
+								.antMatchers("/getEmployees").hasAnyRole("USER", "ADMIN")
+								.antMatchers("/addNewEmployee").hasAnyRole("ADMIN")
+								.anyRequest().authenticated().and()
+								.formLogin().loginPage("/login").permitAll().and()
+								.logout().permitAll(); 
+
